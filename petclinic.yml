@@ -1,0 +1,26 @@
+---
+- hosts: webserver
+  become: yes
+  become_method: sudo
+
+  tasks:
+    - name: installs java
+      apt: pkg=openjdk-8-jdk state=installed
+
+    - name: copy petclinic .jar file
+      copy: src=/var/lib/jenkins/workspace/petclinic/target/spring-petclinic-1.5.1.jar  dest=/home/vagrant
+
+    - name: get ready to set up file that specifies JAVA_HOME
+      file: path=/etc/environment state=absent
+
+   - name: move file that sets up JAVA_HOME
+      copy: src=/etc/environment dest=/etc/environment
+
+   - name: export JAVA_HOME so that running petclinic from this playbook will work
+     shell: export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+
+   - name: export PATH to add JAVA_HOME
+     shell: export PATH=$PATH:$JAVA_HOME/bin
+
+   - name: start petclinic
+     shell: java –jar /home/vagrant/spring-petclinic-1.5.1.jar
