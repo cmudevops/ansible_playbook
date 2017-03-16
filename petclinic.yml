@@ -23,6 +23,7 @@
       shell: export PATH=$PATH:$JAVA_HOME/bin
 
     - name: start petclinic
-      shell: java –jar /home/vagrant/spring-petclinic-1.5.1.jar  
+      shell: java -jar spring-petclinic-1.5.1.jar  
+      
       
 
