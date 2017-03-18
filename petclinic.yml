@@ -8,7 +8,7 @@
       apt: pkg=openjdk-8-jdk state=installed
 
     - name: copy petclinic .jar file
-      copy: src=/var/lib/jenkins/jobs/petclinic/workspace/target/spring-petclinic-1.5.1.jar  dest=/home/vagrant
+      copy: src=/var/lib/jenkins/workspace/petclinic/target/spring-petclinic-1.5.1.jar  dest=/home/vagrant
 
     - name: get ready to set up file that specifies JAVA_HOME
       file: path=/etc/environment state=absent
